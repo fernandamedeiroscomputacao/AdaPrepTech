@@ -88,3 +88,58 @@ void ReverseString(char[] s)
 //cassiokendi@gmail.com
 
 //prova no Everlast
+
+//Buscar Binária
+//Vetores ou listas ordenadas -> log n 
+
+int Search(int[] nums, int target)
+{
+    int left = 0;
+    int right = nums.Length - 1;
+
+    while (left <= right)
+    {
+        int mid = (left + right) / 2;
+
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+        if (nums[mid] < target)
+        {
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
+//números de positivos e número de negativos em um vetor 
+//estratégia um: busca linear e contadores
+//estratégia dois: busca linear da direta para esquerda procurando o primeiro negativo ou zero para identificar quantos são positivos e vice versa
+//estratégia três: buscar binária para achar o primeiro número positivo e o último número negativo 
+
+//target problem = encontrar pares de números que são menores que o valor target
+int CountPairs(IList<int> nums, int target)
+{
+    int count = 0;
+
+    for (int i = 0; i < nums.Count; i++)
+    {
+        for (int j = i + 1; j < nums.Count; j++)
+        {
+            if ((nums[i] + nums[j]) < target)
+            {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+//resolução com busca binária para CountPairs 
