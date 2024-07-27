@@ -1,19 +1,23 @@
 ﻿//Somando elementos do vetor 
-int[] array = [1, 2, 3, 4, 5];
+int[] nums = [1, 2, 3, 4, 5];
+int sum = 0; 
 
-Console.WriteLine("Array de entrada:  ");
-foreach(int i in array)
-{
-    Console.WriteLine(i);
-}
+//Console.WriteLine("Array de entrada:  ");
+//foreach(int i in array)
+//{
+//    Console.WriteLine(i);
+//}
 
-Console.WriteLine("");
+//Console.WriteLine("");
 
 
-Console.WriteLine("Soma de Elementos com Iteração: " + SomaElementosIterando(array));
-Console.WriteLine("Maior elemento com Iteração: " + MaiorElementoIterando(array));
-Console.WriteLine("Elemento N na sequencia Fibbonaci: " + Fib(0));
+//Console.WriteLine("Soma de Elementos com Iteração: " + SomaElementosIterando(array));
+//Console.WriteLine("Maior elemento com Iteração: " + MaiorElementoIterando(array));
+//Console.WriteLine("Elemento N na sequencia Fibbonaci: " + Fib(0));
 
+
+hasPairWithSum(nums, sum); 
+Console.WriteLine(hasPairWithSum(nums, sum));
 
 //chamadas recursivas podem dimunuir a complexidade 
 int SomaElementosIterando(int[] array)
@@ -143,3 +147,132 @@ int CountPairs(IList<int> nums, int target)
 }
 
 //resolução com busca binária para CountPairs 
+
+//Aula 3
+// Two pointers
+
+bool hasPairWithSum(int[] nums, int sum)
+{
+    int left = 0;
+    int right = nums.Length - 1;
+
+    while (left != right)
+    {
+        int result = nums[left] + nums[right];
+
+        if (result == sum)
+        {
+            return true;
+        }
+        else if (result > sum)
+        {
+            right --;
+        }
+        else
+        {
+            left++;
+        }
+    }
+
+    return false;
+}
+
+
+//complexidade tempo O(n)
+//complexidade espaço O(1)
+
+int RemoveDuplicates(int[] nums)
+{
+    int k = 1;
+    for (int i = 1; i < nums.Length; i++)
+    {
+        if (nums[i] != nums[i - 1])
+        {
+            nums[k] = nums[i];
+            k++;
+        }
+    }
+    return k;
+}
+
+ bool IsPalindrome(string s)
+    {
+
+        var cleanString = new string(s.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+        int left = 0;
+        int right = cleanString.Length - 1;
+
+        while (left < right)
+        {
+            if (cleanString[left] == cleanString[right])
+            {
+                left++;
+                right--;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+//move Zeros -> mover zeros para o final do array
+
+//nao funcinou
+bool ValidPalindrome(string s)
+{
+    var cleanString = new string(s.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+    int left = 0;
+    int right = cleanString.Length - 1;
+    int k = 0;
+
+
+    while (left < right)
+    {
+        if (cleanString[left] != cleanString[right])
+        {
+            k++;
+            left--;
+        }
+        left++;
+        right--;
+    }
+
+
+    if (k < 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//nao funcionou
+
+     void Rotate(int[] nums, int k)
+    {
+        int size = k--;
+        List<int> subNums = new List<int>();
+
+
+        for (int i = 0; i < nums.Length - 1; i++)
+        {
+            if (k <= nums.Length - 1)
+            {
+                subNums.Add(nums[k]);
+                nums[k] = nums[i];
+            }
+        }
+
+        for (int j = 0; j < size; j++)
+        {
+            nums[j] = subNums[j];
+        }
+
+    }
+
+
