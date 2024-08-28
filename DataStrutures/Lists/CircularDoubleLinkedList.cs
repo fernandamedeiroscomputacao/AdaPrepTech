@@ -31,7 +31,8 @@ namespace AdaPrepTech.DataStrutures.Lists
 
         public void Test()
         {
-            TestCircularDoubleLinkedListInsert(); 
+            //TestCircularDoubleLinkedListInsert();
+            TestRemove();
         }
 
         public static void TestCircularDoubleLinkedListInsert()
@@ -79,6 +80,47 @@ namespace AdaPrepTech.DataStrutures.Lists
             list.InsertAtPosition(25, 4);
             Console.WriteLine("\nApós inserir 25 na posição 4:");
             list.PrintList();  // Esperado: 30 -> 10 -> 15 -> 25 -> 20 -> 50 -> ...
+        }
+
+        public static void TestRemove()
+        {
+            // Inicializa a lista circular duplamente encadeada
+            CircularDoubleLinkedList list = new CircularDoubleLinkedList();
+
+            // Adiciona alguns elementos na lista
+            list.InsertAtEnd(10);
+            list.InsertAtEnd(20);
+            list.InsertAtEnd(30);
+            list.InsertAtEnd(40);
+            list.InsertAtEnd(50);
+
+            Console.WriteLine("Lista Original:");
+            list.PrintList(); // Esperado: 1 -> 2 -> 3 -> 4 -> 5
+
+            // Teste de remoção na posição 1 (primeiro nó)
+            list.RemoveAtPosition(1);
+            Console.WriteLine("\nApós remover na posição 1 (cabeça):");
+            list.PrintList(); // Esperado: 2 -> 3 -> 4 -> 5
+
+            // Teste de remoção na posição 3 (nó intermediário)
+            list.RemoveAtPosition(3);
+            Console.WriteLine("\nApós remover na posição 3:");
+            list.PrintList(); // Esperado: 2 -> 3 -> 5
+
+            // Teste de remoção no final
+            list.RemoveAtEnd();
+            Console.WriteLine("\nApós remover no final:");
+            list.PrintList(); // Esperado: 2 -> 3
+
+            // Teste de remoção no começo
+            list.RemoveAtBegnning();
+            Console.WriteLine("\nApós remover no começo:");
+            list.PrintList(); // Esperado: 3
+
+            // Teste de remoção quando restar apenas um elemento
+            list.RemoveAtPosition(1);
+            Console.WriteLine("\nApós remover o último elemento:");
+            list.PrintList(); // Esperado: (lista vazia)
         }
 
         public void PrintList()
@@ -163,7 +205,85 @@ namespace AdaPrepTech.DataStrutures.Lists
             newNode.Prev = current;
             current.Next.Prev = newNode;
             current.Next = newNode;
-        }        
+        }
+        
+        public void RemoveAtPosition(int position)
+        {
+            if (head == null || position < 1) return; 
+
+            var current = head;
+            int count = 1;
+
+            if (position == 1)
+            {
+                if (head.Next == head)
+                {
+                    head = null;
+                }
+                else
+                {
+                    head.Prev.Next = head.Next;
+                    head.Next.Prev = head.Prev;
+
+                    head = head.Next;
+                }
+                return;
+            }
+
+            do
+            {
+                if (count == position)
+                {
+                    current.Prev.Next = current.Next;
+                    current.Next.Prev = current.Prev;
+                    return;
+                }
+
+                current = current.Next;
+                count++;
+
+            } while (current != head);
+
+        }
+        public void RemoveAtBegnning()
+        {
+            if(head == null)
+            {
+                return;
+            } 
+            else if(head.Next  == null)
+            {
+                head = null;
+            }
+            else
+            {
+                var current = head;
+                head = head.Next;
+                head.Prev = current.Prev;
+            }
+        }
+
+        public void RemoveAtEnd()
+        {
+            if (head == null)
+            {
+                return;
+            }
+
+            if (head.Next == head)
+            {
+                head = null;
+            }
+            else
+            {
+                var lastNode = head.Prev;
+                var newLastNode = lastNode.Prev;
+
+                newLastNode.Next = head;
+                head.Prev = newLastNode;
+            }
+
+        }
     }
 
 }

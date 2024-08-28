@@ -32,7 +32,8 @@ namespace AdaPrepTech.DataStrutures.Lists
 
         public void Test()
         {
-            TestInsert();
+            //TestInsert();
+            TestRemove();
         }
 
         public static void TestInsert()
@@ -80,6 +81,57 @@ namespace AdaPrepTech.DataStrutures.Lists
             list.InsertAtPosition(25, 4);
             Console.WriteLine("\nApós inserir 25 na posição 4:");
             PrintList(list);  // Esperado: 30 -> 10 -> 15 -> 20 -> 25 -> 50 -> null
+        }
+
+        public static void TestRemove()
+        {
+            var list = new DoubleLinkedList();
+
+            Console.WriteLine("Testando remoções em uma lista duplamente encadeada:");
+
+            // Popula a lista para testes
+            list.InsertAtEnd(10);
+            list.InsertAtEnd(20);
+            list.InsertAtEnd(30);
+            list.InsertAtEnd(40);
+            list.InsertAtEnd(50);
+            Console.WriteLine("\nLista inicial:");
+            PrintList(list);  // Esperado: 10 -> 20 -> 30 -> 40 -> 50 -> null
+
+            // Teste 1: Remover o primeiro elemento
+            list.RemoveAtBeginning();
+            Console.WriteLine("\nApós remover o primeiro elemento:");
+            PrintList(list);  // Esperado: 20 -> 30 -> 40 -> 50 -> null
+
+            // Teste 2: Remover o último elemento
+            list.RemoveAtEnd();
+            Console.WriteLine("\nApós remover o último elemento:");
+            PrintList(list);  // Esperado: 20 -> 30 -> 40 -> null
+
+            // Teste 3: Remover elemento no meio da lista (posição 2, 1-based)
+            list.RemoveAtPosition(2);
+            Console.WriteLine("\nApós remover o elemento na posição 2:");
+            PrintList(list);  // Esperado: 20 -> 40 -> null
+
+            // Teste 4: Remover elemento na posição fora do alcance (posição 5)
+            list.RemoveAtPosition(5);
+            Console.WriteLine("\nApós tentar remover na posição 5 (fora do alcance):");
+            PrintList(list);  // Esperado: 20 -> 40 -> null
+
+            // Teste 5: Remover elemento na posição 1 (remover o primeiro)
+            list.RemoveAtPosition(1);
+            Console.WriteLine("\nApós remover o elemento na posição 1 (primeiro elemento):");
+            PrintList(list);  // Esperado: 40 -> null
+
+            // Teste 6: Remover elemento na posição 1 (último elemento restante)
+            list.RemoveAtPosition(1);
+            Console.WriteLine("\nApós remover o elemento na posição 1 (último elemento restante):");
+            PrintList(list);  // Esperado: Lista vazia
+
+            // Teste 7: Remover em uma lista vazia
+            list.RemoveAtPosition(1);
+            Console.WriteLine("\nApós tentar remover em uma lista vazia:");
+            PrintList(list);  // Esperado: Lista vazia
         }
 
         private static void PrintList(DoubleLinkedList list)
@@ -163,5 +215,88 @@ namespace AdaPrepTech.DataStrutures.Lists
                 current.Next = newNode;
             }
         }
+
+        public void RemoveAtBeginning()
+        {
+            if(head == null)
+            {
+                return;
+            } 
+            else if(head.Next == null)
+            {
+                head = null; 
+            }
+            else
+            {
+                head = head.Next;
+                head.Prev = null; 
+            }
+        }
+
+        public void RemoveAtEnd()
+        {
+            if (head == null)
+            {
+                return;
+            }
+            else if (head.Next == null)
+            {
+                head = null;
+            }
+            else
+            {
+                DoubleNode current = head;
+                while (current.Next != null) 
+                {
+                    current = current.Next;
+                }
+
+                current.Prev.Next = null;
+            }
+
+        }
+
+        public void RemoveAtPosition(int position)
+        {
+            if (head == null) 
+            {
+                return;
+            }
+
+            if (position < 1) 
+            {
+                return;
+            }
+
+            if (position == 1) 
+            {
+                RemoveAtBeginning();
+                return;
+            }
+
+            DoubleNode current = head;
+            int count = 1;
+
+            while (current != null && count < position)
+            {
+                current = current.Next;
+                count++;
+            }
+
+            if (current == null) 
+            {
+                return;
+            }
+
+            if (current.Next == null)
+            {
+                RemoveAtEnd();
+                return;
+            }
+
+            current.Prev.Next = current.Next;
+            current.Next.Prev = current.Prev;
+        }
+
     }
 }
