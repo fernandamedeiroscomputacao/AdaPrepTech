@@ -34,5 +34,38 @@ namespace AdaPrepTech.LeetCode
 
             return -1;
         }
+
+
+        /*------------------- 88 MERGE SORTED ARRAY ------------- */
+        public void MergeArray(int[] nums1, int m, int[] nums2, int n)
+        {
+            int i = m - 1; // Último elemento válido em nums1
+            int j = n - 1; // Último elemento em nums2
+            int k = m + n - 1; // Última posição em nums1
+
+            // Mesclando os arrays de trás para frente
+            while (i >= 0 && j >= 0)
+            {
+                if (nums1[i] > nums2[j])
+                {
+                    nums1[k] = nums1[i];
+                    i--;
+                }
+                else
+                {
+                    nums1[k] = nums2[j];
+                    j--;
+                }
+                k--;
+            }
+
+            // Copiando os elementos restantes de nums2, se houver
+            while (j >= 0)
+            {
+                nums1[k] = nums2[j];
+                j--;
+                k--;
+            }
+        }
     }
 }
