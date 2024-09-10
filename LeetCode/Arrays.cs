@@ -67,5 +67,14 @@ namespace AdaPrepTech.LeetCode
                 k--;
             }
         }
+
+
+        /*-----------169 Majority Element --------------*/
+        public int MajorityElement(int[] nums)
+        {
+            int majority = nums.Length / 2;
+            Array.Sort(nums);
+            return nums[majority];
+        }
     }
 }
