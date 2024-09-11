@@ -76,5 +76,24 @@ namespace AdaPrepTech.LeetCode
             Array.Sort(nums);
             return nums[majority];
         }
+
+        /*---------------- 1051 Heigth Checker ------------- */
+        public int HeightChecker(int[] heights)
+        {
+            int[] expected = (int[])heights.Clone();
+            Array.Sort(expected);
+
+            int result = 0;
+
+            for (int i = 0; i < heights.Length; i++)
+            {
+                if (heights[i] != expected[i])
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
     }
 }
