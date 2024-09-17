@@ -86,3 +86,12 @@
 //queue.Enqueue(40);
 //queue.Enqueue(50);
 //queue.Enqueue(60); // Teste de overflow
+
+class Program
+{
+    static void Main(string[] args)
+    {
+       
+        Console.WriteLine("teste");
+    }
+}
