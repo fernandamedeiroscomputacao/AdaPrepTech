@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdaPrepTech.Math
+namespace AdaPrepTech.MathProblem
 {
     public class IsHappyProblem
     {
