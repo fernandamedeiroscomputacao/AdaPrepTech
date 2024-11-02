@@ -87,11 +87,54 @@
 //queue.Enqueue(50);
 //queue.Enqueue(60); // Teste de overflow
 
-class Program
-{
-    static void Main(string[] args)
-    {
-       
-        Console.WriteLine("teste");
-    }
-}
+
+//int[] series = [1, 3, 2, 1, 4];
+//int serie1 = 1;
+//int serie2 = 2;
+
+//Console.WriteLine("result: " + WatchSeries(series, serie1, serie2));
+
+////o(n^3)
+//int WatchSeries(int[] series, int serie1, int serie2)
+//{
+//    int min_watch = 100000;
+//    int start = 0;
+//    int end = 0;
+
+//    while (start < series.Length)
+//    {
+//        while (end < series.Length)
+//        {
+//            Console.WriteLine("start: " + start);
+//            Console.WriteLine("end: " + end);
+
+//            List<int> current = new List<int>();
+
+//            for (int i = start; i < end; i++)
+//            {
+//                current.Add(series[i]);
+//                Console.WriteLine("current: " + series[i]);
+
+//            }
+
+//            if (current.Contains(serie1) && current.Contains(serie2))
+//            {
+//                int temp = current.Count;
+//                if (temp < min_watch)
+//                {
+//                    min_watch = temp;
+//                    Console.WriteLine("min_watch: " + min_watch);
+
+//                }
+//            }
+            
+//            end++;
+//        }
+
+//        start++;
+//        end = start; 
+//    }
+
+
+//    return min_watch;
+//}
