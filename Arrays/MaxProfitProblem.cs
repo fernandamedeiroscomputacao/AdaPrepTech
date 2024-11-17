@@ -32,5 +32,22 @@ namespace AdaPrepTech.Arrays
 
             return maxProfit;
         }
+
+        public int MaxProfit2(int[] prices)
+        {
+            int max = 0;
+
+            for (int i = 0; i < prices.Length - 1; i++)
+            {
+                if (prices[i] < prices[i + 1])
+                {
+                    max += prices[i + 1] - prices[i];
+                }
+            }
+
+            return max;
+        }
+
+
     }
 }
