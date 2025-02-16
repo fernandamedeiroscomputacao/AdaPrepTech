@@ -8,6 +8,6 @@ namespace AdaPrepTech.MockInterviews.Uber
 {
     internal class SystemDesing
     {
-        /*Implement Instagram */
+        /*Desing a system like Instagram */
     }
 }
